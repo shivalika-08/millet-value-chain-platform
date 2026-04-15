@@ -3,7 +3,7 @@ function Information() {
     return (
       <div className="container">
         <div className="row-4 mt-8 text-center">
-          <h1 style={{ fontFamily: "Roboto Slab" }}>Why GoldGrain Hub?</h1>
+          <h1 style={{ fontFamily: "Roboto Slab" }}>Why ShreeAnna.com?</h1>
           <p className="text-gray-500 mb-4">
             A millet-specific platform designed for India's agricultural
             ecosystem.

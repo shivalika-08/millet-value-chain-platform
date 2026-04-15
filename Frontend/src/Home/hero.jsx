@@ -24,7 +24,7 @@ function Hero() {
             <p className="text-gray-200 mt-2 fs-5 ">
               Connecting millet farmers, FPOs, and SHGs directly to buyers
               <br></br> and processors. Fair prices, QR traceability, and
-              government <br></br> scheme integration — all in one place.
+              government <br></br> scheme integration all in one place.
             </p>
             <button className="btn btn-success btn-lg me-4">Get Started</button>
             <button className="btn btn-outline-secondary btn-lg">
