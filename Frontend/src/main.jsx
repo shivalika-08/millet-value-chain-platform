@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'
-import HomePage from './Home/HomePage'
+
 import signup from './userDashboard/signup'
 
 import './App.css';
