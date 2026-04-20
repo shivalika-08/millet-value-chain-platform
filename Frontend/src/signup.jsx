@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"
 
 
 const Signup = () => {
@@ -134,20 +134,6 @@ const Signup = () => {
               />
             </div>
 
-     
-
-            <div className="form-group">
-              <label className="form-label">Address</label>
-              <input
-                type="text"
-                name="Address"
-                value={register.Address}
-                onChange={handleRegisterChange}
-                className="form-input"
-                placeholder="Address"
-                required
-              />
-            </div>
 
      
 
