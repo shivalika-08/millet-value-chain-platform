@@ -213,4 +213,4 @@ const signup = () => {
   );
 };
 
-export default Registration;
+export default signup;
