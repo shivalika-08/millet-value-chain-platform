@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Registration.css";
 
-const signup = () => {
+const Signup = () => {
   const navigate = useNavigate();
 
   const [register, setRegister] = useState({
@@ -213,4 +213,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
