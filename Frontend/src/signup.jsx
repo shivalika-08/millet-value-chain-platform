@@ -55,7 +55,7 @@ const Signup = () => {
         Location:register.Location.trim(),
       };
 
-      const res = await axios.post("http://localhost:5000/insert", payload);
+      const res = await axios.post("http://localhost:5173/insert", payload);
 
       setMessage(res.data.message || "Signup successful");
 
