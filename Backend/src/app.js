@@ -69,9 +69,12 @@ const verifytoken = (req, res, next) => {
 
 app.post("/insert", async (req, res) => {
   try {
-    const { FullName,email,password,Location} = req.body;
+    console.log("Incoming data:", req.body); // 👈 ADD THIS
+
+    const { FullName, email, password, Location } = req.body;
 
     const existingUser = await Profile.findOne({ email });
+    console.log("Existing user:", existingUser); // 👈 ADD
 
     if (existingUser) {
       return res.status(400).json({
@@ -80,26 +83,22 @@ app.post("/insert", async (req, res) => {
     }
 
     const user = new Profile({
-    FullName,
-    email,
-    password,
-    Location
+      FullName,
+      email,
+      password,
+      Location,
     });
 
     await user.save();
-
-    const token = jwt.sign({ id: user._id }, MY_SECRET_KEY, {
-      expiresIn: "1d",
-    });
+    console.log("User saved:", user); 
 
     res.status(201).json({
       success: true,
       message: "Signup successful",
-      token,
-      user,
     });
+
   } catch (error) {
-    console.log(error);
+    console.log("ERROR:", error); 
     res.status(500).json({
       message: "Server error",
     });
