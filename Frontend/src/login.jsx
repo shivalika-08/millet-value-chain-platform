@@ -21,7 +21,7 @@ function Login() {
   };
 
   const handleupdate = async (e) => {
-    e.preventDefault(); // 🔥 important (page reload rokne ke liye)
+    e.preventDefault(); 
 
     console.log("Login Data:", Login);
 
@@ -99,7 +99,7 @@ function Login() {
                   <label>Password</label>
                   <input
                     type="password"
-                    name="password"   // ✅ FIXED
+                    name="password"   
                     onChange={handlechange}
                     placeholder="**********"
                     required
@@ -110,7 +110,7 @@ function Login() {
                 {/* Button */}
                 <div className="flex justify-center m-2 p-2">
                   <button
-                    type="submit"   // ✅ important
+                    type="submit"  
                     className="bg-green-800 text-white px-4 py-2 rounded"
                   >
                     Login
