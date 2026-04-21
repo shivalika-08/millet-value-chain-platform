@@ -17,6 +17,20 @@ function Signup() {
     });
   };
 
+  
+  fetch("http://localhost:5000/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -49,12 +63,18 @@ function Signup() {
               <p className="m-2 p-1">I am a,</p>
 
               <div className="flex justify-center m-2 p-2">
-                <div className="border-2 border-black h-20 mr-1 rounded-md flex flex-col justify-center text-center w-1/2">
-                  Farmer/FPO
+                <div className="border-2 border-black h-20 mr-2 rounded-md flex flex-col justify-center text-center w-1/2">
+                  <div>
+                    <i class="fa-solid fa-building-wheat"></i>
+                    <p>Farmer/FPO</p>
+                  </div>
                 </div>
 
                 <div className="border-2 border-black h-20 ml-1 rounded-md flex flex-col justify-center text-center w-1/2">
-                  Buyer/Processor
+                  <div>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <p>Buyer/Processor</p>
+                  </div>
                 </div>
               </div>
 
