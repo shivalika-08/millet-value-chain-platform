@@ -21,6 +21,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (
       formData.FullName.charAt(0) !==
       formData.FullName.charAt(0).toUpperCase()
@@ -28,43 +29,47 @@ function Signup() {
       setMessage("First letter of Firstname must be uppercase");
       return;
     }
-   
-
+  
     if (formData.password.length < 6) {
       setMessage("Password must be at least 6 characters long");
       return;
     }
-   
+  
     for (let i = 0; i < formData.email.length; i++) {
       if (formData.email.charAt(i) !== formData.email.charAt(i).toLowerCase()) {
         setMessage("Email must be in lower case");
         return;
       }
     }
+  
     try {
-      const payload=()=>{
-   FUllName: formData.FullName.trim();
-   email:formData.email.trim();
-   password: formData.password;
-   Location:formData.Location.trim();
-
-      }
-
-      const res = await axios.post("http://localhost:5000/signup", payload);
-
+      const payload = {
+        FullName: formData.FullName.trim(),
+        email: formData.email.trim(),
+        password: formData.password,
+        Location: formData.Location.trim(),
+      };
+  
+      console.log("Sending data:", payload);
+  
+      const res = await axios.post(
+        "http://localhost:5000/signup",
+        payload
+      );
+  
       setMessage(res.data.message || "Signup successful");
-
+  
       setFormData({
-       FullName:"",
-       email:"",
-       password:"",
-       Location:"",
+        FullName: "",
+        email: "",
+        password: "",
+        Location: "",
       });
+  
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
   return (
     <>
       <div className="p-0">

@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
-app.use(express.json());
 
 const MY_SECRET_KEY = "1234@#$1";
 
@@ -43,7 +43,7 @@ profileSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
-  next();
+ 
 });
 
 
@@ -92,7 +92,7 @@ app.post("/signup", async (req, res) => {
     await user.save();
     console.log("User saved:", user); 
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Signup successful",
     });
