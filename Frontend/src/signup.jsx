@@ -56,7 +56,7 @@ function Signup() {
         "http://localhost:5000/signup",
         payload
       );
-  
+      alert(res.data.message || "Account created successfully");
       setMessage(res.data.message || "Registration Successful");
   
       setFormData({
@@ -109,7 +109,7 @@ function Signup() {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} >
                 <div className="flex flex-col m-2 p-2">
                   <label>FullName</label>
                   <input
