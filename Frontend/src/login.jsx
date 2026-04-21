@@ -1,60 +1,118 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "./footer";
+import axios from "axios";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const [Login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [message, setmessage] = useState(null);
+
+  const handlechange = (e) => {
+    setLogin({
+      ...Login,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleupdate = async (e) => {
+    e.preventDefault(); // 🔥 important (page reload rokne ke liye)
+
+    console.log("Login Data:", Login);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/login",
+        Login,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("senderemail", Login.email);
+
+        setmessage({
+          type: "success",
+          message: "Login successful! Redirecting...",
+        });
+
+        setTimeout(() => {
+          navigate("/Farmernav");
+        }, 1000);
+      } else {
+        setmessage({
+          type: "danger",
+          message: res.data.message || "Login failed",
+        });
+      }
+    } catch (error) {
+      setmessage({
+        type: "danger",
+        message: error.response?.data?.message || "Server error",
+      });
+    }
+  };
+
   return (
     <>
       <div className="p-0">
-        {/* Navbar */}
         <nav className="fixed top-0 w-full flex justify-center items-center h-16 bg-olive-500">
-          <div className="flex justify-center font-serif">
-            <h2>ShreeAnna.com</h2>
-          </div>
+          <h2 className="font-serif">ShreeAnna.com</h2>
         </nav>
 
         <div className="pt-20">
-          {/* Heading */}
-          <div className="m-2 p-2">
-            <h4 className="flex justify-center font-serif">Welcome Back;)</h4>
-            <p className="flex justify-center text-gray-600 font-roboto-slab">
-              Login to your account
-            </p>
+          <div className="m-2 p-2 text-center">
+            <h4 className="font-serif">Welcome Back ;)</h4>
+            <p className="text-gray-600">Login to your account</p>
           </div>
 
-          {/* Form Card */}
           <div className="flex justify-center m-2 p-2">
-            <div className="border-2 border-black h-3/4 w-3/12 bg-olive-100 rounded-lg">
-              <form>
+            <div className="border-2 border-black w-3/12 bg-olive-100 rounded-lg">
+              
+              {/* 🔥 form submit handle */}
+              <form onSubmit={handleupdate}>
+                
                 {/* Email */}
                 <div className="flex flex-col m-2 p-2">
-                  <label htmlFor="email">Email Address</label>
+                  <label>Email Address</label>
                   <input
                     type="email"
-                    id="email"
                     name="email"
+                    onChange={handlechange}
                     placeholder="youremail@.com"
                     required
-                    className="border-2 border-black rounded-md h-10 focus:ring-2 focus:ring-green-600"
+                    className="border-2 border-black rounded-md h-10"
                   />
                 </div>
 
                 {/* Password */}
                 <div className="flex flex-col m-2 p-2">
-                  <label htmlFor="password">Password</label>
+                  <label>Password</label>
                   <input
                     type="password"
-                    id="password"
-                    name="pass"
+                    name="password"   // ✅ FIXED
+                    onChange={handlechange}
                     placeholder="**********"
                     required
-                    className="border-2 border-black rounded-md h-10 focus:ring-2 focus:ring-green-600"
+                    className="border-2 border-black rounded-md h-10"
                   />
                 </div>
 
                 {/* Button */}
-                <div className="flex justify-center m-2 p-1">
-                  <button className="bg-green-800 text-white px-4 py-2 rounded">
+                <div className="flex justify-center m-2 p-2">
+                  <button
+                    type="submit"   // ✅ important
+                    className="bg-green-800 text-white px-4 py-2 rounded"
+                  >
                     Login
                   </button>
                 </div>
@@ -62,17 +120,23 @@ function Login() {
             </div>
           </div>
 
-          {/* Bottom Link */}
-          <p className="flex justify-center m-2 p-2 text-gray-500">
+          {/* Message */}
+          {message && (
+            <p className={`text-center ${message.type === "danger" ? "text-red-500" : "text-green-600"}`}>
+              {message.message}
+            </p>
+          )}
+
+          <p className="text-center text-gray-500">
             Don't have an account?
-            <Link to={"/Signup"} className="no-underline text-black ml-1">
+            <Link to="/Signup" className="ml-1 text-black">
               Signup
             </Link>
           </p>
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
