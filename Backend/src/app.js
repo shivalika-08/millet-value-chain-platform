@@ -67,7 +67,7 @@ const verifytoken = (req, res, next) => {
 };
 
 
-app.post("/insert", async (req, res) => {
+app.post("/signup", async (req, res) => {
   try {
     console.log("Incoming data:", req.body); 
 

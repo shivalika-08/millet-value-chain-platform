@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./footer";
+import axios from "axios"
 
 function Signup() {
+  const[message ,setMessage]=useState('')
   const [formData, setFormData] = useState({
-    name: "",
+    FullName: "",
     email: "",
     password: "",
-    location: "",
+    Location: "",
   });
 
   const handleChange = (e) => {
@@ -17,27 +19,51 @@ function Signup() {
     });
   };
 
-  
-  fetch("http://localhost:5000/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
-  
-  
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      formData.FullName.charAt(0) !==
+      formData.FullName.charAt(0).toUpperCase()
+    ) {
+      setMessage("First letter of Firstname must be uppercase");
+      return;
+    }
+   
 
-    console.log("User Data:", formData);
+    if (formData.password.length < 6) {
+      setMessage("Password must be at least 6 characters long");
+      return;
+    }
+   
+    for (let i = 0; i < formData.email.length; i++) {
+      if (formData.email.charAt(i) !== formData.email.charAt(i).toLowerCase()) {
+        setMessage("Email must be in lower case");
+        return;
+      }
+    }
+    try {
+      const payload=()=>{
+   FUllName: formData.FullName.trim();
+   email:formData.email.trim();
+   password: formData.password;
+   Location:formData.Location.trim();
 
-    alert("Account Created Successfully!");
-  };
+      }
+
+      const res = await axios.post("http://localhost:5000/signup", payload);
+
+      setMessage(res.data.message || "Signup successful");
+
+      setFormData({
+       FullName:"",
+       email:"",
+       password:"",
+       Location:"",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -80,11 +106,11 @@ function Signup() {
 
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col m-2 p-2">
-                  <label>Full Name</label>
+                  <label>FullName</label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="FullName"
+                    value={formData.FullName}
                     onChange={handleChange}
                     placeholder="Your full name"
                     required
@@ -122,8 +148,8 @@ function Signup() {
                   <label>Enter your Location</label>
                   <input
                     type="text"
-                    name="location"
-                    value={formData.location}
+                    name="Location"
+                    value={formData.Location}
                     onChange={handleChange}
                     placeholder="City, State"
                     className="border-2 border-black rounded-md h-10"
@@ -131,7 +157,7 @@ function Signup() {
                 </div>
 
                 <div className="flex justify-center m-2 p-1">
-                  <button
+                  <button onClick={handleSubmit}
                     type="submit"
                     className="bg-green-800 text-white px-4 py-2 rounded"
                   >
