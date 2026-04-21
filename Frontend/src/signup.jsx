@@ -81,11 +81,8 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <nav>
-     
 
-<<<<<<< HEAD
+
         {/* Content */}
         <div className="pt-15">
           <div className="mt-0 m-2 p-2">
@@ -174,7 +171,7 @@ const Signup = () => {
                   </button>
                 </div>
               </form>
-=======
+
         <div className="nav-links">
           <Link to="/" className="nav-link">
             Home
@@ -185,8 +182,7 @@ const Signup = () => {
           <Link to="/registration" className="nav-link active">
             Registration
           </Link>
-        </div>
-      </nav>
+              </div>
 
       <div className="registration-wrapper">
         <div className="registration-card">
@@ -207,10 +203,8 @@ const Signup = () => {
                 placeholder="First Name"
                 required
               />
->>>>>>> 3bc60dd0d94855fb9774f3ab704b9782e2dbe19a
-            </div>
 
-<<<<<<< HEAD
+            </div>
           {/* Login Link */}
           <p className="flex justify-center m-2 p-2 text-gray-500">
             Already have an account?
@@ -218,7 +212,6 @@ const Signup = () => {
               Login
             </Link>
           </p>
-=======
           
 
             <div className="form-group">
@@ -233,10 +226,6 @@ const Signup = () => {
                 required
               />
             </div>
-
-
-     
-
             <div className="form-group">
               <label className="form-label">Password</label>
               <input
@@ -293,10 +282,14 @@ const Signup = () => {
               {message}
             </div>
           )}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         </div>
       </div>
-    </div>
+
   );
-};
+
 
 export default Signup;
