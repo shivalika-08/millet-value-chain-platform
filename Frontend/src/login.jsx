@@ -46,7 +46,7 @@ function Login() {
         });
 
         setTimeout(() => {
-          navigate("/Farmernav");
+          navigate("/main");
         }, 1000);
       } else {
         setmessage({
