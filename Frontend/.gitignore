@@ -7,6 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Backend ignore
+Backend/node_modules/
+
+# Frontend ignore (safe)
+Frontend/node_modules/
+
+# Cache
+.cache/
+
 node_modules
 dist
 dist-ssr
