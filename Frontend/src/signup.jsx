@@ -10,7 +10,7 @@ function Signup() {
     password: "",
     Location: "",
   });
-  const [setMessage] = useState(null);
+  const [Message,setMessage] = useState(null);
   const handleChange = (e) => {
     setFormData({
       ...formData,
