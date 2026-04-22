@@ -1,17 +1,16 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./footer";
-import axios from "axios"
+import axios from "axios";
 
 function Signup() {
-  
   const [formData, setFormData] = useState({
     FullName: "",
     email: "",
     password: "",
     Location: "",
   });
-  const[message ,setMessage]=useState('')
+  const [setMessage] = useState(null);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,27 +20,26 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (
-      formData.FullName.charAt(0) !==
-      formData.FullName.charAt(0).toUpperCase()
+      formData.FullName.charAt(0) !== formData.FullName.charAt(0).toUpperCase()
     ) {
       setMessage("First letter of Firstname must be uppercase");
       return;
     }
-  
+
     if (formData.password.length < 6) {
       setMessage("Password must be at least 6 characters long");
       return;
     }
-  
+
     for (let i = 0; i < formData.email.length; i++) {
       if (formData.email.charAt(i) !== formData.email.charAt(i).toLowerCase()) {
         setMessage("Email must be in lower case");
         return;
       }
     }
-  
+
     try {
       const payload = {
         FullName: formData.FullName.trim(),
@@ -49,23 +47,19 @@ function Signup() {
         password: formData.password,
         Location: formData.Location.trim(),
       };
-  
+
       console.log("Sending data:", payload);
-  
-      const res = await axios.post(
-        "http://localhost:5000/signup",
-        payload
-      );
+
+      const res = await axios.post("http://localhost:5000/signup", payload);
       alert(res.data.message || "Account created successfully");
       setMessage(res.data.message || "Registration Successful");
-  
+
       setFormData({
         FullName: "",
         email: "",
         password: "",
         Location: "",
       });
-  
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +103,7 @@ function Signup() {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col m-2 p-2">
                   <label>FullName</label>
                   <input
@@ -162,7 +156,8 @@ function Signup() {
                 </div>
 
                 <div className="flex justify-center m-2 p-1">
-                  <button onClick={handleSubmit}
+                  <button
+                    onClick={handleSubmit}
                     type="submit"
                     className="bg-green-800 text-white px-4 py-2 rounded"
                   >
