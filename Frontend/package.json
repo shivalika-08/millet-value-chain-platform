@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://lovekesh.github.io/millets-value-chain-platform",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -10,6 +11,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
