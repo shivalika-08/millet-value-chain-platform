@@ -6,8 +6,8 @@ import Analytics from './Analytics';
 import Order from './order';
 
 
-import Farmernav from "./Farmernav";
-import Header from './header';
+import Farmernav from "./framnav";
+import Header from './Header';
 
 import Footer from '../footer';
 

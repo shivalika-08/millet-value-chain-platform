@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function Farmernav() {
+function Farmnav() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -118,4 +118,4 @@ function Farmernav() {
   );
 }
 
-export default Farmernav;
+export default Farmnav;
