@@ -16,6 +16,13 @@ function Navbar() {
         {/* Links */}
         <ul className="flex gap-4 sm:gap-6 md:gap-10 items-center">
           <li>
+            <Link to={'/marketPlace'}
+            className="text-black text-sm sm:text-base font-bold font-roboto no-underline"
+            >
+            marketPlace
+            </Link>
+          </li>
+          <li>
             <Link
               to={"/Signup"}
               className="text-black text-sm sm:text-base font-bold font-roboto no-underline"

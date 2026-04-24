@@ -37,6 +37,13 @@ const profileSchema = new mongoose.Schema({
     required:true,
   }
 });
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: String,
+  desc: String,
+  farmer: String,
+});
+
 
 
 profileSchema.pre("save", async function (next) {
@@ -48,6 +55,7 @@ profileSchema.pre("save", async function (next) {
 
 
 const Profile = mongoose.model("Profile", profileSchema);
+
 
 const verifytoken = (req, res, next) => {
   const authHeader = req.headers["authorization"];

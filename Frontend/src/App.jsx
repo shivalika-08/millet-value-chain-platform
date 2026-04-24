@@ -8,6 +8,7 @@ import Footer from './footer';
 import Signup from './signup';
 import Login from './login';
 import Aboutus from './Aboutus';
+import Marketplace from './userDashboard/marketPlace';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/Login' element={<Login/>} />
           <Route path='/Aboutus' element={<Aboutus/>} />
           <Route path='/Footer'element={<Footer/>}/>
+          <Route path='/marketPlace' element={<Marketplace/>}/>
         </Routes>
       </>
     );
