@@ -2,7 +2,7 @@ import React from "react";
 
 function Header({ setActiveTab }) {
   return (
-    <section className="mt-17">
+    <section className="mt-17 cursor-pointer">
       <div className="sticky">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center m-2 p-2 gap-3">

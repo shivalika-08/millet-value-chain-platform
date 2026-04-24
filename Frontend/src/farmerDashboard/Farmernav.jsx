@@ -6,7 +6,7 @@ function Farmernav() {
 
   return (
     <nav
-      className="w-full fixed top-0 z-50"
+      className="w-full fixed top-0 z-50 cursor-pointer"
       style={{ backgroundColor: "rgba(0, 60, 0, 0.8)" }}
     >
       <div className="flex justify-between items-center px-4 md:px-10 py-3">
