@@ -19,7 +19,7 @@ function Navbar() {
             <Link to={'/marketPlace'}
             className="text-black text-sm sm:text-base font-bold font-roboto no-underline"
             >
-            marketPlace
+            MarketPlace
             </Link>
           </li>
           <li>
