@@ -47,7 +47,7 @@ function Login() {
         });
 
         setTimeout(() => {
-          navigate("/Header");
+          navigate("/Framhome");
         }, 1000);
       } else {
         setmessage({

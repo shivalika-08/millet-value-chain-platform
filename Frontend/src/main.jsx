@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes } from 'react-router-dom'
 import App from './App'
+import "./i18n";
 
 
 import './App.css';
