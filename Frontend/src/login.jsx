@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "./footer";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "./utils/userSlice";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [Login, setLogin] = useState({
     email: "",
     password: "",
   });
+  
 
   const [message, setmessage] = useState(null);
 
@@ -39,6 +43,12 @@ function Login() {
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("senderemail", Login.email);
+        localStorage.setItem("FullName",res.data.FullName)
+        dispatch(addUser({
+          FullName:res.data.FullName
+        }))
+        
+        
     
 
         setmessage({

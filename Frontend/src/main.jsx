@@ -4,15 +4,20 @@ import { BrowserRouter, Routes } from 'react-router-dom'
 import App from './App'
 import "./i18n";
 
-
 import './App.css';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  
+  <Provider store={appStore}>
+    <BrowserRouter>
     <App/>
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
+ 
   ,
 )
 

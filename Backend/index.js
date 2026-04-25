@@ -90,7 +90,7 @@ app.post("/signup", async (req, res) => {
     });
 
     await user.save();
-    console.log("User saved:", user); 
+   
 
     res.status(200).json({
       success: true,
@@ -109,10 +109,11 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password ,FullName} = req.body;
     console.log(req.body);
 
     const user = await Profile.findOne({ email });
+     
 
     if (!user) {
       return res.status(401).json({ message: "User not found" });
@@ -132,7 +133,9 @@ app.post("/login", async (req, res) => {
       success: true,
       message: "Login successful",
       token,
+      FullName:user.FullName
     });
+    console.log(res.data);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }

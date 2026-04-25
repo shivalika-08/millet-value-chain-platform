@@ -1,6 +1,21 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { useEffect } from "react";
+import { addUser } from "../utils/userSlice";
+
 
 function Header({ setActiveTab }) {
+const user = useSelector((state)=>state.user)
+const dispatch = useDispatch()
+useEffect(() => {
+  if (!user) {
+    const name = localStorage.getItem("FullName");
+    if (name) {
+      dispatch(addUser({ FullName: name }));
+    }
+  }
+}, []);
+  
   return (
     <section className="mt-17 cursor-pointer">
       <div className="sticky">
@@ -9,10 +24,10 @@ function Header({ setActiveTab }) {
         <div className="flex flex-row justify-between items-center m-2 p-1">
           <div className="ml-3 mt-3 p-2">
             <h2 className="font-serif">
-              Namaste, User! <i className="fa-solid fa-ghost"></i>
+              Namaste, {user?.FullName||"FullName"}! <i className="fa-solid fa-ghost"></i>
             </h2>
             <p className="text-gray-500">
-              Dear user, Manage your millet listings
+              Dear {user?.FullName}, Manage your millet listings
             </p>
           </div>
 
