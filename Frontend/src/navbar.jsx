@@ -17,7 +17,7 @@ function Navbar() {
         <ul className="flex gap-4 sm:gap-6 md:gap-10 items-center">
           <li>
             <Link to={'/marketPlace'}
-            className="text-black text-sm sm:text-base font-bold font-roboto no-underline"
+            className="text-black text-sm sm:text-base font-bold font-roboto no-underline!"
             >
             MarketPlace
             </Link>
@@ -25,7 +25,7 @@ function Navbar() {
           <li>
             <Link
               to={"/Signup"}
-              className="text-black text-sm sm:text-base font-bold font-roboto no-underline"
+              className="text-black text-sm sm:text-base font-bold font-roboto no-underline!"
             >
               SignUp
             </Link>
@@ -34,7 +34,7 @@ function Navbar() {
           <li>
             <Link
               to={"/Aboutus"}
-              className="text-black text-sm sm:text-base font-bold font-roboto no-underline"
+              className="text-black text-sm sm:text-base font-bold font-roboto no-underline!"
             >
               Aboutus
             </Link>
