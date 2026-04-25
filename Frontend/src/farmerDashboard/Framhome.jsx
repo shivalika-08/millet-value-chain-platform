@@ -8,12 +8,14 @@ import Order from './order';
 
 import Farmernav from "./framnav";
 import Header from './Header';
+import AddProductModal from './AddProductModal';
 
 import Footer from '../footer';
 
 function Framhome() {
 
   const [activeTab, setActiveTab] = useState("products");
+  const [showModal, setShowModal] = useState(false);
 
   const renderComponent = () => {
     switch (activeTab) {
@@ -32,11 +34,14 @@ function Framhome() {
     return (
       <>
         <Farmernav />
-        <Header setActiveTab={setActiveTab} />
+        <Header setActiveTab={setActiveTab}
+          openModel={() => setShowModal(true)} />
         <div className='p-2'>
           {renderComponent()}
         </div>
-        <Footer/>
+        <Footer />
+        
+        {showModal && (<AddProductModal closeModal={() => setShowModal(false)}/>)}
       </>
     );
 }

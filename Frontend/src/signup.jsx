@@ -54,6 +54,7 @@ function Signup() {
       const res = await axios.post("http://localhost:5000/signup", payload);
       alert(res.data.message || "Account created successfully");
       setMessage(res.data.message || "Registration Successful");
+      
 
       setFormData({
         FullName: "",
