@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import Userhome from "./userDashboard/Userhome";
 import Footer from "./footer";
+
 import axios from "axios";
 
 function Signup() {
@@ -108,7 +111,9 @@ function Signup() {
                 <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2">
                   <div>
                     <i className="fa-solid fa-cart-shopping"></i>
-                    <p>Buyer/Processor</p>
+                    <p>
+                      <Link to={"/Userhome"}>Buyer/Processor</Link>
+                    </p>
                   </div>
                 </div>
               </div>

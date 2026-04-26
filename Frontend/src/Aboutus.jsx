@@ -1,11 +1,24 @@
 import React from "react";
-import Navbar from "./navbar";
+import { useNavigate } from "react-router-dom";
+
 import Footer from "./footer";
 
 function Aboutus() {
+  const navigate = useNavigate();
+
+  
   return (
     <>
-      <Navbar />
+      <div className="flex flex-row justify-between content-center">
+        <div>
+          <p className="font-serif p-2 text-3xl fixed">ShreeAnna.com</p>
+        </div>
+        <div className="p-2">
+          <button onClick={() => navigate(-1)}>
+            <i class="fa-solid fa-x text-2xl"></i>
+          </button>
+        </div>
+      </div>
 
       <div className="m-3 sm:m-5 p-3 text-center cursor-pointer">
         {/* Heading */}
@@ -71,7 +84,6 @@ function Aboutus() {
             ))}
           </div>
         </div>
-
 
         {/* Types */}
         <div className="grid place-content-center m-5">
