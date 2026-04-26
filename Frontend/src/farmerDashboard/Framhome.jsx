@@ -1,19 +1,17 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
-import ProductListing from './ProductListing';
-import Analytics from './Analytics';
-import Order from './order';
-
+import ProductListing from "./ProductListing";
+import Analytics from "./Analytics";
+import Order from "./order";
 
 import Farmernav from "./framnav";
-import Header from './Header';
-import AddproductForm from './AddproductForm';
+import Header from "./Header";
+import AddproductForm from "./AddproductForm";
 
-import Footer from '../footer';
+import Footer from "../footer";
 
 function Framhome() {
-
   const [activeTab, setActiveTab] = useState("products");
   const [showModal, setShowModal] = useState(false);
 
@@ -22,28 +20,27 @@ function Framhome() {
       case "products":
         return <ProductListing />;
       case "orders":
-        return <Order />
+        return <Order />;
       case "analytics":
-        return <Analytics />
+        return <Analytics />;
       default:
-        return <ProductListing />
+        return <ProductListing />;
     }
   };
 
+  return (
+    <>
+      <Farmernav />
+      <Header
+        setActiveTab={setActiveTab}
+        openModel={() => setShowModal(true)}
+      />
+      <div className="p-2">{renderComponent()}</div>
+      <Footer />
 
-    return (
-      <>
-        <Farmernav />
-        <Header setActiveTab={setActiveTab}
-          openModel={() => setShowModal(true)} />
-        <div className='p-2'>
-          {renderComponent()}
-        </div>
-        <Footer />
-        
-        {showModal && (<AddproductForm closeModal={() => setShowModal(false)}/>)}
-      </>
-    );
+      {showModal && <AddproductForm closeModal={() => setShowModal(false)} />}
+    </>
+  );
 }
 
 export default Framhome;

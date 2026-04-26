@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import Footer from "./footer";
 
-function Aboutus() {
-  const navigate = useNavigate();
 
-  
+
+function Aboutus() {
+   const navigate = useNavigate();
   return (
     <>
       <div className="flex flex-row justify-between content-center">

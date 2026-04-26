@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-function Farmnav({ setActiveTab }) {
+function Usernav({ setActiveTab }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
@@ -129,7 +129,7 @@ function Farmnav({ setActiveTab }) {
           <Link
             className="text-white font-bold no-underline!"
             onClick={() => setOpen(false)}
-            onClick= {() => setActiveTab("dashboard")}
+            onClick={() => setActiveTab("dashboard")}
           >
             {t("dashboard")}
           </Link>
@@ -207,4 +207,4 @@ function Farmnav({ setActiveTab }) {
   );
 }
 
-export default Farmnav;
+export default Usernav;

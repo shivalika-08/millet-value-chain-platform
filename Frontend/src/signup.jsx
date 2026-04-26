@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from "./footer";
+import axios from "axios";
 
 import Userhome from "./userDashboard/Userhome";
-import Footer from "./footer";
-
-import axios from "axios";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -111,9 +110,7 @@ function Signup() {
                 <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2">
                   <div>
                     <i className="fa-solid fa-cart-shopping"></i>
-                    <p>
-                      <Link to={"/Userhome"}>Buyer/Processor</Link>
-                    </p>
+                    <Link to={"/Userhome"}>Buyer/Processor</Link>
                   </div>
                 </div>
               </div>
