@@ -40,7 +40,7 @@ function Farmnav() {
         <ul className="hidden md:flex items-center gap-8">
           <li>
             <Link
-              to={"/Aboutus"}
+              to={"/marketPlace"}
               className="text-white font-bold no-underline!"
             >
               {t("marketplace")}
@@ -117,7 +117,7 @@ function Farmnav() {
       {open && (
         <div className="md:hidden flex flex-col items-center gap-4 pb-4 bg-[rgba(0,60,0,0.9)]">
           <Link
-            to={"/Aboutus"}
+            to={"/marketPlace"}
             className="text-white font-bold no-underline!"
             onClick={() => setOpen(false)}
           >

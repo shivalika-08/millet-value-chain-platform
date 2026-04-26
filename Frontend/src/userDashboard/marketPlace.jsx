@@ -4,6 +4,8 @@
 import Navbar from "../navbar";
 import Footer from "../footer";
 
+import ProductCard from "./ProductCard";
+
 const Marketplace = () => {
   // const navigate = useNavigate();
   // const [products, setProducts] = useState([]);
@@ -52,7 +54,7 @@ const Marketplace = () => {
           </div>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-1 justify-evenly md:justify-evenly text-xs sm:text-sm font-semibold">
+          <div className="flex flex-wrap gap-1 justify-evenly md:justify-evenly text-xs sm:text-xs font-semibold">
             {[
               "All",
               "Pearl Millet",
@@ -60,16 +62,29 @@ const Marketplace = () => {
               "Foxtail Millet",
               "Sorghum",
               "Little Millet",
-              // "Barnyard Millet",
-              // "Organic",
+              "Barnyard Millet",
+              "Organic",
             ].map((item, index) => (
               <button
                 key={index}
-                className="px-3 py-1 border text-sm hover:bg-green-900 hover:text-white rounded whitespace-nowrap"
+                className="px-1 py-1 border text-xs hover:bg-green-900 hover:text-white rounded whitespace-nowrap"
               >
                 {item}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* listings */}
+        <div className="p-6">
+          {/* Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+
+            {/* Only structure (later map from backend) */}
+            <ProductCard />
+
+            {/* <ProductCard />
+            <ProductCard /> */}
           </div>
         </div>
       </div>

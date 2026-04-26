@@ -1,6 +1,6 @@
 export default function AddProductModal({ closeModal }) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 ">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
       <div className="relative bg-olive-100 w-[400px] p-6 rounded-xl shadow-lg z-10">
@@ -39,7 +39,7 @@ export default function AddProductModal({ closeModal }) {
             </label>
             <input
               className="w-full border p-2 rounded hover:ring ring-green-900 ring-offset-2"
-              placeholder="Variety"
+              placeholder="e.g. HHB67"
               type="text"
             />
           </div>
@@ -76,6 +76,41 @@ export default function AddProductModal({ closeModal }) {
               placeholder="Description"
             ></textarea>
           </div>
+
+          <div>
+            <label htmlFor="" className="font-roboto mb-1">
+              Product Image
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              className="w-full border p-2 rounded hover:ring ring-green-900 ring-offset-2"
+            />
+          </div>
+
+          <div className="flex gap-2">
+            <div>
+              <label htmlFor="" className="font-roboto mb-1">
+                Who are you?
+              </label>
+              <input
+                className="w-max border p-2 rounded hover:ring ring-green-900 ring-offset-2"
+                placeholder="Enter you name"
+                type="text"
+              />
+            </div>
+            <div>
+              <label htmlFor="" className="font-roboto mb-1">
+                Location
+              </label>
+              <input
+                className="w-4/5 border p-2 rounded hover:ring ring-green-900 ring-offset-2"
+                placeholder="City, State"
+                type="text"
+              />
+            </div>
+          </div>
+
 
           <button className="w-full bg-green-900 text-white py-2 rounded">
             List Product
