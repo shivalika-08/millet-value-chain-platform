@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { addUser } from "../utils/userSlice";
 
 
-function Header({ setActiveTab }) {
+
+function Header({ setActiveTab, openModel }) {
 const user = useSelector((state)=>state.user)
 const dispatch = useDispatch()
 useEffect(() => {
@@ -32,7 +33,7 @@ useEffect(() => {
           </div>
 
           <div className="w-full md:w-auto">
-            <button className="btn btn-success btn-md w-full md:w-auto">
+            <button className="btn btn-success btn-md w-full md:w-auto" onClick={openModel}>
               <i className="fa-solid fa-plus mr-1"></i> Add Product
             </button>
           </div>

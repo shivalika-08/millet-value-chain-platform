@@ -24,7 +24,6 @@ function Farmnav() {
       });
       dispatch(removeUser());
       navigate("/Login")
-      
     }
     catch(err){
       console.error(err)
