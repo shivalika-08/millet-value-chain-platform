@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function ProductListing() {
-
   const [products, setProducts] = useState({
     Millets: "",
     Price: ""
   });
 
-  
+  const [productList, setProductList] = useState([]);
+
+  // 🔹 Handle input
   const handleChange = (e) => {
     setProducts({
       ...products,
@@ -16,14 +17,14 @@ function ProductListing() {
     });
   };
 
-
+  // 🔹 Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const prod = {
         Millets: products.Millets.trim(),
-        Price: products.Price.trim()
+        Price: Number(products.Price)
       };
 
       const res = await axios.post(
@@ -31,11 +32,12 @@ function ProductListing() {
         prod
       );
 
-      console.log(res.data);
       alert("Product added successfully");
 
-      // reset form
       setProducts({ Millets: "", Price: "" });
+
+      // refresh list
+      fetchProducts();
 
     } catch (error) {
       console.error(error);
@@ -43,9 +45,25 @@ function ProductListing() {
     }
   };
 
+  // 🔹 Fetch products
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/products");
+      setProductList(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 🔹 Load on start
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div className="mx-2 p-2 font-roboto font-semibold">
-   
+
+      {/* FORM */}
       <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
@@ -57,7 +75,7 @@ function ProductListing() {
         />
 
         <input
-          type="text"
+          type="number"
           name="Price"
           placeholder="Enter Price"
           value={products.Price}
@@ -65,62 +83,58 @@ function ProductListing() {
           className="border p-2 mr-2"
         />
 
-        <button type="submit" className="bg-green-500 text-white px-4 py-2">
+        <button className="bg-green-500 text-white px-4 py-2">
           Add Product
         </button>
       </form>
 
-     
+      {/* PRODUCT LIST */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-<<<<<<< Updated upstream
-        <div className="flex flex-col border-2 border-black rounded-xl bg-olive-200 p-3">
-          {/* Top Gradient */}
-          <div className="h-32 flex items-center justify-center overflow-hidden">
-            <div className="w-full h-full">
+        {productList.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col border-2 border-black rounded-xl bg-green-200 p-3"
+          >
+            {/* Image */}
+            <div className="h-32 overflow-hidden">
               <img
                 src="./picture1.jpg"
-                alt=""
+                alt="product"
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
-          </div>
 
-          {/* Top */}
-          <div className="flex justify-between items-start m-2">
-=======
-        <div className="flex flex-col border-2 border-black rounded-xl bg-green-200 p-3">
-          
-          <div className="flex justify-between items-start">
->>>>>>> Stashed changes
-            <h6 className="text-sm sm:text-base">
-              Pearl Millet (Bajra)
-              <p className="text-xs text-gray-600">HHB67</p>
-            </h6>
-            <p className="text-sm sm:text-base">₹2,800</p>
-          </div>
+            {/* Top */}
+            <div className="flex justify-between items-start mt-2">
+              <h6 className="text-sm sm:text-base">
+                {item.Millets}
+                <p className="text-xs text-gray-600">Local Variety</p>
+              </h6>
+              <p className="text-sm sm:text-base">₹{item.Price}</p>
+            </div>
 
-          <div className="mt-2 flex flex-wrap gap-2">
-            <button className="btn btn-warning btn-sm rounded-pill">
-              Organic
-            </button>
-            <button className="btn btn-outline-light btn-sm rounded-pill text-black">
-              FSSAI
-            </button>
-          </div>
+            {/* Tags */}
+            <div className="mt-2 flex gap-2">
+              <span className="bg-yellow-400 px-2 py-1 text-xs rounded">
+                Organic
+              </span>
+              <span className="border px-2 py-1 text-xs rounded">
+                FSSAI
+              </span>
+            </div>
 
-          <div className="flex justify-between items-center mt-2 text-gray-500 text-xs sm:text-sm">
-            <p>Stock: 500 quintals</p>
-            <p>Location</p>
-          </div>
+            {/* Bottom */}
+            <div className="flex justify-between mt-2 text-gray-500 text-xs">
+              <p>Stock: 500 quintals</p>
+              <p>India</p>
+            </div>
 
-<<<<<<< Updated upstream
-          {/* Details of Farmer */}
-          <span className="flex justify-between items-center text-gray-500 text-xs sm:text-sm">
-            <p>Name</p>
-          </span>
-=======
->>>>>>> Stashed changes
-        </div>
+            {/* Farmer */}
+            <p className="text-xs text-gray-600 mt-1">
+              Farmer: Unknown
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
