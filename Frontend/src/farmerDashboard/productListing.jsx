@@ -5,7 +5,7 @@ function ProductListing() {
 
   const [products, setProducts] = useState([]);
 
- 
+  // 🔹 Fetch products from backend
   const fetchProducts = async () => {
     try {
       const res = await axios.get("http://localhost:5000/products");
@@ -26,7 +26,7 @@ function ProductListing() {
         {products.map((item, index) => (
           <div key={index} className="flex flex-col border-2 border-black rounded-xl bg-olive-200 p-3">
             
-          
+            {/* Top */}
             <div className="flex justify-between items-start">
               <h6 className="text-sm sm:text-base">
                 {item.ProductName}
@@ -35,7 +35,7 @@ function ProductListing() {
               <p className="text-sm sm:text-base">₹{item.Price}</p>
             </div>
 
-          
+            {/* Tags */}
             <div className="mt-2 flex flex-wrap gap-2">
               <button className="btn btn-warning btn-sm rounded-pill">
                 Organic
@@ -45,7 +45,7 @@ function ProductListing() {
               </button>
             </div>
 
-           
+            {/* Bottom */}
             <div className="flex justify-between items-center mt-2 text-gray-500 text-xs sm:text-sm">
               <p>Stock: {item.Stock} quintals</p>
               <p>{item.Location}</p>

@@ -8,12 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
 const MY_SECRET_KEY = "1234@#$1";
 
+
 mongoose
-  .connect(
-    "mongodb+srv://lovekeshsharma1999_db_user:Love1234567@cluster0.rp4d0m1.mongodb.net/?appName=Cluster0",
-  )
+  .connect("mongodb+srv://lovekeshsharma1999_db_user:Love1234567@cluster0.rp4d0m1.mongodb.net/?appName=Cluster0")
   .then(() => console.log("MongoDB connected "))
   .catch((err) => console.log("Connection error :", err.message));
 
@@ -22,7 +22,7 @@ const profileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+ 
   email: {
     type: String,
     required: true,
@@ -32,10 +32,10 @@ const profileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Location: {
-    type: String,
-    required: true,
-  },
+  Location:{
+    type:String, 
+    required:true,
+  }
 });
 const productSchema = new mongoose.Schema({
   ProductName: { type: String, required: true },
@@ -44,10 +44,12 @@ const productSchema = new mongoose.Schema({
   Price: { type: Number, required: true },
   Stock: { type: String, required: true },
   Description: { type: String, required: true },
-  ProductImage: { type: String }, 
+  ProductImage: { type: String }, // store URL or filename
   Name: { type: String, required: true },
   Location: { type: String, required: true },
 });
+
+
 
 
 
@@ -55,10 +57,13 @@ profileSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
+ 
 });
+
 
 const Profile = mongoose.model("Profile", profileSchema);
 const AddProduct = mongoose.model("AddProduct", productSchema);
+
 
 const verifytoken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -77,14 +82,15 @@ const verifytoken = (req, res, next) => {
   });
 };
 
+
 app.post("/signup", async (req, res) => {
   try {
-    console.log("Incoming data:", req.body);
+    console.log("Incoming data:", req.body); 
 
     const { FullName, email, password, Location } = req.body;
 
     const existingUser = await Profile.findOne({ email });
-    console.log("Existing user:", existingUser);
+    console.log("Existing user:", existingUser); 
 
     if (existingUser) {
       return res.status(400).json({
@@ -100,25 +106,30 @@ app.post("/signup", async (req, res) => {
     });
 
     await user.save();
+   
 
     res.status(200).json({
       success: true,
       message: "Signup successful",
+      
     });
+
   } catch (error) {
-    console.log("ERROR:", error);
+    console.log("ERROR:", error); 
     res.status(500).json({
       message: "Server error",
     });
   }
 });
 
+
 app.post("/login", async (req, res) => {
   try {
-    const { email, password, FullName } = req.body;
+    const { email, password ,FullName} = req.body;
     console.log(req.body);
 
     const user = await Profile.findOne({ email });
+     
 
     if (!user) {
       return res.status(401).json({ message: "User not found" });
@@ -138,13 +149,14 @@ app.post("/login", async (req, res) => {
       success: true,
       message: "Login successful",
       token,
-      FullName: user.FullName,
+      FullName:user.FullName
     });
     console.log(res.data);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 app.get("/display", verifytoken, async (req, res) => {
   try {
@@ -154,6 +166,7 @@ app.get("/display", verifytoken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 app.post("/addproduct", async (req, res) => {
   try {
     const {
@@ -196,6 +209,7 @@ app.post("/addproduct", async (req, res) => {
     });
   }
 });
+
 app.get("/products", async (req, res) => {
   const data = await AddProduct.find();
   res.json(data);

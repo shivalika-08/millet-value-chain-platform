@@ -14,7 +14,7 @@ export default function AddproductForm({ closeModal }) {
     Location: "",
   });
 
-
+  // 🔹 handle change
   const handleChange = (e) => {
     setProduct({
       ...product,
@@ -22,7 +22,7 @@ export default function AddproductForm({ closeModal }) {
     });
   };
 
-
+  // 🔹 submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,14 +43,14 @@ export default function AddproductForm({ closeModal }) {
         addDetail
       );
 
-      alert("Product Added ");
+      alert("Product Added ✅");
       console.log(res.data);
 
       closeModal();
 
     } catch (error) {
       console.error(error);
-      alert("Error adding product ");
+      alert("Error adding product ❌");
     }
   };
 
