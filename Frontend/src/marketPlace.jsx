@@ -1,8 +1,8 @@
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-import Navbar from "../navbar";
-import Footer from "../footer";
+import Navbar from "./navbar";
+import Footer from "./footer";
 
 import ProductCard from "./ProductCard";
 
