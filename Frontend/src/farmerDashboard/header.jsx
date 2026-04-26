@@ -15,7 +15,7 @@ useEffect(() => {
     }
   }
 }, []);
-  
+
   return (
     <section className="mt-17 cursor-pointer">
       <div className="sticky">

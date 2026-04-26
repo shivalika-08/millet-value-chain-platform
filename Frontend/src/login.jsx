@@ -24,7 +24,7 @@ function Login() {
     });
   };
 
-  const handleupdate = async (e) => {
+  const handleupdate = async (e) => { 
     e.preventDefault(); 
 
     console.log("Login Data:", Login);

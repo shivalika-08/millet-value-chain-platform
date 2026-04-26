@@ -1,14 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios"
+import { removeUser } from "../utils/userSlice";
+import { useDispatch } from "react-redux";
+
+
 
 
 function Farmnav() {
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
 
+
   // for language buttons
   const [langOpen, setLangOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = async()=>{
+    try{
+      await axios.post("http://localhost:5000/logout",{},{
+        withCredentials:true,
+      });
+      dispatch(removeUser());
+      navigate("/Login")
+      
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
 
   return (
     <nav
@@ -47,8 +68,9 @@ function Farmnav() {
             </Link>
           </li>
           <li>
-            <Link to={"/Signup"} className="text-white font-bold">
-              {t("signup")}
+            <Link to={"/Login"}className="text-white font-bold"
+             onClick={handleLogout}>
+              {t("Logout")}
             </Link>
           </li>
 
@@ -114,11 +136,11 @@ function Farmnav() {
             {t("about")}
           </Link>
           <Link
-            to={"/Signup"}
+            to="#"
             className="text-white font-bold"
-            onClick={() => setOpen(false)}
+            onClick={handleLogout}
           >
-            {t("signup")}
+            {t("Logout")}
           </Link>
           <Link className="text-decoration-none">
             {!langOpen && (
