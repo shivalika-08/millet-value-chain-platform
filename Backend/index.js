@@ -44,6 +44,20 @@ const productSchema = new mongoose.Schema({
   farmer: String,
 });
 
+const addProductSchema = new mongoose.Schema({
+  Millets: {
+    type: String,
+    required: true
+  },
+  Price: {
+    type: Number,
+    required: true
+  }
+});
+
+
+
+
 
 
 profileSchema.pre("save", async function (next) {
@@ -55,6 +69,7 @@ profileSchema.pre("save", async function (next) {
 
 
 const Profile = mongoose.model("Profile", profileSchema);
+const AddProduct = mongoose.model("AddProduct", addProductSchema);
 
 
 const verifytoken = (req, res, next) => {
@@ -156,6 +171,31 @@ app.get("/display", verifytoken, async (req, res) => {
     res.status(200).json({ success: true, Profile: user });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
+  }
+});
+app.post('/addproduct', async (req, res) => {
+  try {
+    const { Millets, Price } = req.body;
+
+    const product = new AddProduct({
+      Millets,
+      Price
+    });
+
+    await product.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Product added successfully",
+      data: product
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: error.message
+    });
   }
 });
 const port = 5000;

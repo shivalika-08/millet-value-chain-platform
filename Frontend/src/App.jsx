@@ -8,7 +8,12 @@ import Footer from './footer';
 import Signup from './signup';
 import Login from './login';
 import Aboutus from './Aboutus';
+<<<<<<< Updated upstream
 import Marketplace from './marketPlace';
+=======
+import Marketplace from './userDashboard/marketPlace';
+import ProductListing from './farmerDashboard/ProductListing';
+>>>>>>> Stashed changes
 
 
 function App() {
@@ -22,6 +27,7 @@ function App() {
           <Route path='/Aboutus' element={<Aboutus/>} />
           <Route path='/Footer'element={<Footer/>}/>
           <Route path='/marketPlace' element={<Marketplace/>}/>
+          <Route path='/productListing'element={<ProductListing/>}/>
         </Routes>
       </>
     );
