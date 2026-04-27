@@ -4,11 +4,10 @@ import Marketplace from "./marketPlace";
 import Usernav from "./Usernav";
 import Dashboard from "./Dashboard";
 import Cart from "./Cart";
-
 import Footer from "../footer";
 
 function Userhome() {
-  const [activeTab, setActiveTab] = useState("products");
+  const [activeTab, setActiveTab] = useState("marketplace");
 
   const renderComponent = () => {
     switch (activeTab) {
@@ -24,10 +23,6 @@ function Userhome() {
   };
 
   return (
-<<<<<<< HEAD
-    <div></div>
-  )}
-=======
     <>
       <Usernav setActiveTab={setActiveTab} />
       <div className="p-2">{renderComponent()}</div>
@@ -35,6 +30,5 @@ function Userhome() {
     </>
   );
 }
->>>>>>> 580ac1ac828006c230bcd4765a0503525ce023b3
 
 export default Userhome;

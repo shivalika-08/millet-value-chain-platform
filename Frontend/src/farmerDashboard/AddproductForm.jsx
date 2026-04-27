@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 import axios from "axios";
 import { useState } from "react";
 
-export default function AddproductForm({ closeModal }) {
 
-=======
 export default function AddProductModal({ closeModal }) {
->>>>>>> 580ac1ac828006c230bcd4765a0503525ce023b3
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       {" "}
