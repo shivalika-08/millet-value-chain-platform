@@ -1,4 +1,5 @@
 const express = require("express");
+const userRoutes=require('./router/user');
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -82,46 +83,46 @@ const verifytoken = (req, res, next) => {
   });
 };
 
-app.post("/signup", async (req, res) => {
-  try {
-    console.log("Incoming data:", req.body); 
+// app.post("/signup", async (req, res) => {
+//   try {
+//     console.log("Incoming data:", req.body); 
 
-    const { FullName, email, password, Location } = req.body;
+//     const { FullName, email, password, Location } = req.body;
 
-    const existingUser = await Profile.findOne({ email });
-    console.log("Existing user:", existingUser); 
+//     const existingUser = await Profile.findOne({ email });
+//     console.log("Existing user:", existingUser); 
 
-    if (existingUser) {
-      return res.status(400).json({
-        message: "User already exists",
-      });
-    }
+//     if (existingUser) {
+//       return res.status(400).json({
+//         message: "User already exists",
+//       });
+//     }
 
-    const user = new Profile({
-      FullName,
-      email,
-      password,
-      Location,
-    });
+//     const user = new Profile({
+//       FullName,
+//       email,
+//       password,
+//       Location,
+//     });
 
-    await user.save();
+//     await user.save();
    
 
-    res.status(200).json({
-      success: true,
-      message: "Signup successful",
+//     res.status(200).json({
+//       success: true,
+//       message: "Signup successful",
       
-    });
+//     });
 
-  } catch (error) {
-    console.log("ERROR:", error); 
-    res.status(500).json({
-      message: "Server error",
-    });
-  }
-});
+//   } catch (error) {
+//     console.log("ERROR:", error); 
+//     res.status(500).json({
+//       message: "Server error",
+//     });
+//   }
+// });
 
-
+app.use('/signup',userRoutes());
 app.post("/login", async (req, res) => {
   try {
     const { email, password ,FullName} = req.body;
