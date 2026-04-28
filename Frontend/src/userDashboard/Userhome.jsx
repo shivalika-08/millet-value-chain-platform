@@ -6,27 +6,21 @@ import Usernav from "./Usernav";
 import Dashboard from "./Dashboard";
 import Cart from "./Cart";
 import Footer from "../footer";
-import { CartContext } from "../CartContext.jsx";
-
 
 function Userhome() {
-
-  const [activeTab, setActiveTab] = useState("marketplace");
-
-
   const location = useLocation();
+
   const params = new URLSearchParams(location.search);
   const tabFromURL = params.get("tab");
+
+
   const [activeTab, setActiveTab] = useState(tabFromURL || "marketplace");
 
- useEffect(() => {
-   const params = new URLSearchParams(location.search);
-   const tab = params.get("tab");
-   if (tab) setActiveTab(tab);
- }, [location]);
-
-
-
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab) setActiveTab(tab);
+  }, [location]);
 
   const renderComponent = () => {
     switch (activeTab) {
@@ -43,9 +37,7 @@ function Userhome() {
 
   return (
     <>
-      <Usernav
-        setActiveTab={setActiveTab}
-      />
+      <Usernav setActiveTab={setActiveTab} />
       <div className="p-2">{renderComponent()}</div>
       <Footer />
     </>
