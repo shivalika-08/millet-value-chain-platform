@@ -23,10 +23,8 @@ export default function AddProductModal({ closeModal }) {
   const handlesubmit = async (e) => {
     e.preventDefault();
 
-  
     if (loading) return;
 
-  
     if (
       !addproduct.ProductName ||
       !addproduct.MilletType ||
@@ -46,7 +44,6 @@ export default function AddProductModal({ closeModal }) {
 
       alert(res.data.message);
 
-    
       setaddproduct({
         ProductName: "",
         MilletType: "",
@@ -61,7 +58,7 @@ export default function AddProductModal({ closeModal }) {
       console.error(error);
       alert("Error adding product");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -70,24 +67,17 @@ export default function AddProductModal({ closeModal }) {
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
       <div className="relative bg-olive-100 w-[400px] p-6 rounded-xl shadow-lg z-10">
+        
+        {/* Close Button */}
         <button onClick={closeModal} className="absolute top-2 right-3 text-xl">
-<<<<<<< Updated upstream
           <i className="fa-solid fa-x"></i>
         </button>
 
         <h2 className="font-semibold mb-4 font-serif">Add New Product</h2>
 
         <form onSubmit={handlesubmit} className="space-y-3">
-          
+
           {/* Product Name */}
-=======
-          {" "}
-          <i className="fa-solid fa-x"></i>{" "}
-        </button>{" "}
-        <h2 className="font-semibold mb-4 font-serif">Add New Product</h2>{" "}
-        <form className="space-y-3">
-          {" "}
->>>>>>> Stashed changes
           <div>
             <label className="mb-1 font-roboto">Product Name</label>
             <input
@@ -148,16 +138,14 @@ export default function AddProductModal({ closeModal }) {
             </div>
 
             <div>
-              <label className="font-roboto mb-1">
-                Stock (quintals)
-              </label>
+              <label className="font-roboto mb-1">Stock (quintals)</label>
               <input
                 name="Stock"
                 value={addproduct.Stock}
                 onChange={handlechange}
                 className="w-4/5 border p-2 rounded hover:ring ring-green-900 ring-offset-2"
                 placeholder="200"
-                type="text"
+                type="number"
               />
             </div>
           </div>

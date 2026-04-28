@@ -10,9 +10,9 @@ import { CartContext } from "../CartContext.jsx";
 
 
 function Userhome() {
-<<<<<<< Updated upstream
+
   const [activeTab, setActiveTab] = useState("marketplace");
-=======
+
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -26,7 +26,7 @@ function Userhome() {
  }, [location]);
 
 
->>>>>>> Stashed changes
+
 
   const renderComponent = () => {
     switch (activeTab) {
