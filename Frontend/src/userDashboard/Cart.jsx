@@ -4,10 +4,10 @@ import { CartContext } from "../CartContext";
 
 function Cart() {
   const navigate = useNavigate();
-
-  const { cartItems, increaseQty, decreaseQty, removeItem } = useContext(CartContext);
-
   const [showForm, setShowForm] = useState(false);
+
+  const { cartItems, increaseQty, decreaseQty, removeItem, placeOrder } =
+    useContext(CartContext);
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -48,6 +48,8 @@ function Cart() {
             </div>
           </div>
         ) : (
+            
+            
           // {when cart is full}
           /* AFTER */
           <div className="p-6 min-h-screen">
@@ -55,7 +57,9 @@ function Cart() {
               Shopping Cart ({cartItems.length})
             </h2>
 
-            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="flex flex-col lg:flex-row gap-6">
+                
+                
               {/* LEFT SIDE */}
               <div className="flex-1">
                 {cartItems.map((item) => (
@@ -143,23 +147,33 @@ function Cart() {
                       type="text"
                       placeholder="Full Name"
                       className="w-full border rounded-lg p-2 ring-2 ring-olive-200 hover:ring-green-900 mb-2"
+                      required
                     />
                     <input
                       type="text"
                       placeholder="Phone Number"
                       className="w-full border rounded-lg p-2 ring-2 ring-olive-200 hover:ring-green-900 mb-2"
+                      required
                     />
                     <input
                       type="text"
                       placeholder="Delivery Address"
                       className="w-full border rounded-lg p-2 ring-2 ring-olive-200 hover:ring-green-900 mb-2"
+                      required
                     />
                   </div>
                 )}
 
                 <button
-                  onClick={() => setShowForm(true)}
-                  className="w-full bg-green-800 text-white py-3 rounded-lg mt-2 rounded"
+                  onClick={() => {
+                    if (!showForm) {
+                      setShowForm(true); 
+                    } else {
+                      placeOrder();
+                      navigate("/Userhome?tab=dashboard")
+                    }
+                  }}
+                  className="w-full bg-green-800 text-white py-3 rounded-lg! mt-2"
                 >
                   {showForm
                     ? `Place Order — ₹${totalPrice}`
