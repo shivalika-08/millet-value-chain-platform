@@ -1,6 +1,16 @@
 import React from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { CartContext } from "../CartContext";
 
 function ProductCard() {
+
+  const { addToCart } = useContext(CartContext);
+
+
+  const navigate = useNavigate();
+
   return (
     <div className="w-full max-w-sm mx-auto bg-white rounded-2xl shadow-md border overflow-hidden hover:shadow-lg transition duration-300">
       {/* Top Gradient */}
@@ -32,13 +42,13 @@ function ProductCard() {
         {/* Tags */}
         <div className="flex gap-1 flex-wrap text-xs">
           <span>
-            <div className="bg-yellow-500 text-blackpx-2 py-1 rounded-full text-bold m-1 p-1">
-              <i class="fa-solid fa-leaf"></i>Organic
+            <div className="bg-yellow-500 text-black px-2 py-1 rounded-full text-bold m-1 p-1">
+              <i className="fa-solid fa-leaf"></i>Organic
             </div>
           </span>
           <span>
             <div className="bg-gray-100 px-1 py-1 rounded-full m-1 p-1 text-bold border-2 border-gray-100">
-              <i class="fa-solid fa-apple-whole"></i>FSSAI
+              <i className="fa-solid fa-apple-whole"></i>FSSAI
             </div>
           </span>
           <span>
@@ -50,16 +60,29 @@ function ProductCard() {
 
         {/* Seller */}
         <p className="text-xs text-gray-400 break-words">
-          <i class="fa-solid fa-user"></i>Seller Name{" "}
-          <i class="fa-solid fa-location-dot"></i> City, State
+          <i className="fa-solid fa-user"></i>Seller Name{" "}
+          <i className="fa-solid fa-location-dot"></i> City, State
         </p>
 
         {/* Buttons */}
         <div className="flex gap-2 pt-2 flex-col sm:flex-row">
-          <button className="flex-1 bg-green-900 text-white py-2 rounded-lg! hover:bg-green-800">
-            <i class="fa-solid fa-cart-shopping m-1"></i>Add to Cart
+          <button
+            className="flex-1 bg-green-900 text-white py-2 rounded-lg! hover:bg-green-800"
+            onClick={() =>
+              addToCart({
+                id: 1,
+                name: "Product Name",
+                price: 2800,
+                quantity: 1,
+              })
+            }
+          >
+            <i className="fa-solid fa-cart-shopping m-1"></i>Add to Cart
           </button>
-          <button className="px-3 border rounded-lg! text-sm hover:bg-yellow-500">
+          <button
+            className="px-3 border rounded-lg! text-sm hover:bg-yellow-500"
+            onClick={() => navigate("/Productdetails")}
+          >
             Details
           </button>
         </div>

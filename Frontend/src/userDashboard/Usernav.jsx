@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { CartContext } from "../CartContext";
 
-function Usernav({ setActiveTab }) {
+function Usernav() {
+  const { cartItems } = useContext(CartContext);
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const isLoggedIn = !!localStorage.getItem("token");
+  const [langOpen, setLangOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
-
-  const [langOpen, setLangOpen] = useState(false);
 
   return (
     <nav
@@ -21,50 +23,55 @@ function Usernav({ setActiveTab }) {
       style={{ backgroundColor: "rgba(0, 60, 0, 0.8)" }}
     >
       <div className="flex justify-between items-center px-4 md:px-10 py-3">
-        <h4 className="font-bold font-serif text-xl sm:text-2xl md:text-3xl text-white">
+        <h4 className="font-bold font-serif text-xl md:text-2xl text-white">
           ShreeAnna.com
         </h4>
 
-        <div className="md:hidden text-white text-2xl cursor-pointer">
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden text-white text-2xl">
           <i
             className={`fa-solid ${open ? "fa-x" : "fa-bars"}`}
             onClick={() => setOpen(!open)}
           ></i>
         </div>
 
+        {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8">
           <li>
-            <Link
-              className="text-white font-bold no-underline!"
-              onClick={() => setActiveTab("marketplace")}
+            <button
+              className="text-white font-bold"
+              onClick={() => navigate("/Userhome?tab=marketplace")}
             >
               {t("marketplace")}
-            </Link>
+            </button>
           </li>
 
           <li>
-            <Link
-              className="text-white font-bold no-underline!"
-              onClick={() => setActiveTab("cart")}
+            <button
+              className="text-white font-bold relative"
+              onClick={() => navigate("/Userhome?tab=cart")}
             >
               <i className="fa-solid fa-cart-shopping"></i>
-            </Link>
+
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1 rounded-full">
+                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </button>
           </li>
 
           <li>
-            <Link
-              className="text-white font-bold no-underline!"
-              onClick={() => setActiveTab("dashboard")}
+            <button
+              className="text-white font-bold"
+              onClick={() => navigate("/Userhome?tab=dashboard")}
             >
               {t("dashboard")}
-            </Link>
+            </button>
           </li>
 
           <li>
-            <Link
-              to={"/Aboutus"}
-              className="text-white font-bold no-underline!"
-            >
+            <Link to="/Aboutus" className="text-white font-bold no-underline!">
               {t("about")}
             </Link>
           </li>
@@ -75,21 +82,20 @@ function Usernav({ setActiveTab }) {
                 {t("Logout")}
               </button>
             ) : (
-              <Link to={"/Signup"} className="text-white font-bold">
+              <Link to="/Signup" className="text-white font-bold no-underline!">
                 {t("signup")}
               </Link>
             )}
           </li>
 
+          {/* Language */}
           <li>
-            {!langOpen && (
+            {!langOpen ? (
               <i
                 className="fa-solid fa-language text-white text-xl cursor-pointer"
                 onClick={() => setLangOpen(true)}
               ></i>
-            )}
-
-            {langOpen && (
+            ) : (
               <div className="flex gap-2">
                 <button
                   onClick={() => {
@@ -100,7 +106,6 @@ function Usernav({ setActiveTab }) {
                 >
                   EN
                 </button>
-
                 <button
                   onClick={() => {
                     i18n.changeLanguage("hi");
@@ -116,33 +121,48 @@ function Usernav({ setActiveTab }) {
         </ul>
       </div>
 
+      {/* Mobile Menu */}
       {open && (
         <div className="md:hidden flex flex-col items-center gap-4 pb-4 bg-[rgba(0,60,0,0.9)]">
-          <Link
-            className="text-white font-bold no-underline!"
-            onClick={() => setOpen(false)}
-            onClick={() => setActiveTab("marketplace")}
+          <button
+            className="text-white font-bold"
+            onClick={() => {
+              setOpen(false);
+              navigate("/Userhome?tab=marketplace");
+            }}
           >
             {t("marketplace")}
-          </Link>
+          </button>
 
-          <Link
-            className="text-white font-bold no-underline!"
-            onClick={() => setOpen(false)}
-            onClick={() => setActiveTab("dashboard")}
+          <button
+            className="text-white font-bold"
+            onClick={() => {
+              setOpen(false);
+              navigate("/Userhome?tab=dashboard");
+            }}
           >
             {t("dashboard")}
-          </Link>
+          </button>
 
-          <Link
-            className="text-white font-bold no-underline!"
-            onClick={() => setActiveTab("cart")}
+          {/* ✅ Mobile Cart with Badge */}
+          <button
+            className="text-white font-bold relative"
+            onClick={() => {
+              setOpen(false);
+              navigate("/Userhome?tab=cart");
+            }}
           >
-            <i className="fa-solid fa-cart-shopping"></i>
-          </Link>
+            <i className="fa-solid fa-cart-shopping text-xl"></i>
+
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1 rounded-full">
+                {cartItems.reduce((total, item) => total + item.quantity, 0)}
+              </span>
+            )}
+          </button>
 
           <Link
-            to={"/Aboutus"}
+            to="/Aboutus"
             className="text-white font-bold no-underline!"
             onClick={() => setOpen(false)}
           >
@@ -161,23 +181,22 @@ function Usernav({ setActiveTab }) {
             </button>
           ) : (
             <Link
-              to={"/Signup"}
-              className="text-white font-bold"
+              to="/Signup"
+              className="text-white font-bold no-underline!"
               onClick={() => setOpen(false)}
             >
               {t("signup")}
             </Link>
           )}
 
-          <Link className="text-decoration-none">
-            {!langOpen && (
+          {/* Language (mobile) */}
+          <div>
+            {!langOpen ? (
               <i
                 className="fa-solid fa-language text-white text-xl cursor-pointer"
                 onClick={() => setLangOpen(true)}
               ></i>
-            )}
-
-            {langOpen && (
+            ) : (
               <div className="flex gap-2">
                 <button
                   onClick={() => {
@@ -188,7 +207,6 @@ function Usernav({ setActiveTab }) {
                 >
                   EN
                 </button>
-
                 <button
                   onClick={() => {
                     i18n.changeLanguage("hi");
@@ -200,7 +218,7 @@ function Usernav({ setActiveTab }) {
                 </button>
               </div>
             )}
-          </Link>
+          </div>
         </div>
       )}
     </nav>

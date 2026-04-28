@@ -71,6 +71,7 @@ export default function AddProductModal({ closeModal }) {
 
       <div className="relative bg-olive-100 w-[400px] p-6 rounded-xl shadow-lg z-10">
         <button onClick={closeModal} className="absolute top-2 right-3 text-xl">
+<<<<<<< Updated upstream
           <i className="fa-solid fa-x"></i>
         </button>
 
@@ -79,6 +80,14 @@ export default function AddProductModal({ closeModal }) {
         <form onSubmit={handlesubmit} className="space-y-3">
           
           {/* Product Name */}
+=======
+          {" "}
+          <i className="fa-solid fa-x"></i>{" "}
+        </button>{" "}
+        <h2 className="font-semibold mb-4 font-serif">Add New Product</h2>{" "}
+        <form className="space-y-3">
+          {" "}
+>>>>>>> Stashed changes
           <div>
             <label className="mb-1 font-roboto">Product Name</label>
             <input

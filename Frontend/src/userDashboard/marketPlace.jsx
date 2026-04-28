@@ -2,6 +2,7 @@
 // import { useNavigate } from "react-router-dom";
 
 
+
 import ProductCard from "./ProductCard";
 
 const Marketplace = () => {
@@ -77,17 +78,16 @@ const Marketplace = () => {
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
 
+
             {/* Only structure (later map from backend) */}
             <ProductCard />
 
-            <ProductCard />
-            <ProductCard />
+
           </div>
         </div>
       </div>
     </>
   );
-      
 };
 
 
