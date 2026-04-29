@@ -108,22 +108,22 @@ function Signup() {
               <p className="m-2 p-2">I am a,</p>
 
               {/* Role Selection */}
-              <div className="flex flex-col sm:flex-row justify-center m-2 p-2 gap-2">
-                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2">
+              <div className="flex flex-col sm:flex-row justify-center m-2 p-2 gap-2 ">
+                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2 ">
                   <div>
                     <i className="fa-solid fa-building-wheat"></i>
-                    <button 
-                    type="button"
-                    onClick={()=>setRole("farmer")}>Farmer/FPO</button>
+                    <button type="button" onClick={() => setRole("farmer")}>
+                      Farmer/FPO
+                    </button>
                   </div>
                 </div>
 
-                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2">
+                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2 ">
                   <div>
                     <i className="fa-solid fa-cart-shopping"></i>
-                    <button 
-                    type="button"
-                    onClick={()=>setRole("buyer")}>Buyer/Processor</button>
+                    <button type="button" onClick={() => setRole("buyer")}>
+                      Buyer/Processor
+                    </button>
                   </div>
                 </div>
               </div>
