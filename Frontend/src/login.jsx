@@ -67,9 +67,7 @@ function Login() {
           message: "Login successful! Redirecting...",
         });
       
-        setTimeout(() => {
-          navigate("/Framhome"); 
-        }, 1000);
+     
       }
        else {
         setMessage({
