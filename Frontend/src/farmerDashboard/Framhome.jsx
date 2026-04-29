@@ -15,6 +15,7 @@ function Framhome() {
   const [activeTab, setActiveTab] = useState("products");
   const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
 
   const renderComponent = () => {
     switch (activeTab) {

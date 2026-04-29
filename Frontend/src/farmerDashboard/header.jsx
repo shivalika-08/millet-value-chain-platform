@@ -7,13 +7,18 @@ import { addUser } from "../utils/userSlice";
 
 function Header({ setActiveTab, openModel }) {
 const user = useSelector((state)=>state.user)
+const name = JSON.parse(localStorage.getItem("user"));
+
+
 const dispatch = useDispatch()
 useEffect(() => {
-  if (!user) {
-    const name = localStorage.getItem("FullName");
+  if (!name) {
+    // const name = JSON.parse(localStorage.getItem("FullName"));
+    console.log( user)
     if (name) {
-      dispatch(addUser({ FullName: name }));
-    }
+       dispatch(addUser({FullName:name}))
+    };
+
   }
 }, []);
 
@@ -25,10 +30,10 @@ useEffect(() => {
         <div className="flex flex-row justify-between items-center m-2 p-1">
           <div className="ml-3 mt-3 p-2">
             <h2 className="font-serif">
-              Namaste, {user?.FullName||"FullName"}! <i className="fa-solid fa-ghost"></i>
+              Namaste, {name?.FullName||"FullName"}! <i className="fa-solid fa-ghost"></i>
             </h2>
             <p className="text-gray-500">
-              Dear {user?.FullName}, Manage your millet listings
+              Dear {name?.FullName}, Manage your millet listings
             </p>
           </div>
 
