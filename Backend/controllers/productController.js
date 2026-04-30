@@ -13,7 +13,8 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+   
+    const products = await Product.find({ userId: req.user.id });
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
