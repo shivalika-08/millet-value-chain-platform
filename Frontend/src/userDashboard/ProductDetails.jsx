@@ -27,6 +27,12 @@ function ProductDetails() {
 
   const totalPrice = pricePerUnit * quantity;
 
+  const role = localStorage.getItem("role");
+
+  if (role !== "buyer") {
+    return <h1>Access Denied</h1>;
+  }
+
   return (
     <>
       <Usernav />

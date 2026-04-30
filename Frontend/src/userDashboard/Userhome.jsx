@@ -31,15 +31,17 @@ function Userhome() {
       case "marketplace":
         return <Marketplace />;
       default:
-        return <Marketplace />;
+        return <Marketplace  />;
     }
   };
 
   return (
     <>
-      <Usernav setActiveTab={setActiveTab} />
-      <div className="p-2">{renderComponent()}</div>
-      <Footer />
+      <div className="min-h-screen flex flex-col">
+        <Usernav setActiveTab={setActiveTab} />
+        <div className="p-2">{renderComponent()}</div>
+        <Footer />
+      </div>
     </>
   );
 }

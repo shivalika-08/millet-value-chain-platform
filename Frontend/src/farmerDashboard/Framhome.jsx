@@ -9,6 +9,8 @@ import Farmernav from "./framnav";
 import Header from "./Header";
 import AddproductForm from "./AddproductForm";
 
+import Marketplace from "../userDashboard/marketPlace";
+
 import Footer from "../footer";
 
 function Framhome() {
@@ -53,23 +55,23 @@ function Framhome() {
 
   return (
     <>
-      <Farmernav />
+      <div className="min-h-screen flex flex-col">
+        <Farmernav />
 
-      <Header
-        user={user}
-        setActiveTab={setActiveTab}
-        openModel={() => setShowModal(true)}
-      />
+        <Header
+          user={user}
+          setActiveTab={setActiveTab}
+          openModel={() => setShowModal(true)}
+        />
 
-      <div className="p-2">
-        {user ? renderComponent() : <p>Loading...</p>}
+        <div className="p-2">
+          {user ? renderComponent() : <p>Loading...</p>}
+        </div>
+
+        <Footer />
+
+        {showModal && <AddproductForm closeModal={() => setShowModal(false)} />}
       </div>
-
-      <Footer />
-
-      {showModal && (
-        <AddproductForm closeModal={() => setShowModal(false)} />
-      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="w-full p-0 bg-olive-100 border-t-2 border-gray-300 cursor-pointer">
+    <div className="w-full mt-auto bg-olive-100 border-t-2 border-gray-300 cursor-pointer">
       {/* Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-4">
         {/* Column 1 */}

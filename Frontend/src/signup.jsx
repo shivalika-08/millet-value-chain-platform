@@ -7,12 +7,12 @@ import Userhome from "./userDashboard/Userhome";
 
 function Signup() {
   const [formData, setFormData] = useState({
-    FullName: "",
+    fullName: "",
     email: "",
     password: "",
-    Location: "",
+    location: "",
   });
-  const [Message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const[role , setRole] = useState("")
 
@@ -26,9 +26,12 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      formData.FullName.charAt(0) !== formData.FullName.charAt(0).toUpperCase()
-    ) {
+    if (!role) {
+      setMessage("Please select a role");
+      return;
+    }
+
+    if (formData.fullName.charAt(0) !== formData.fullName.charAt(0).toUpperCase()){
       setMessage("First letter of Firstname must be uppercase");
       return;
     }
@@ -49,10 +52,10 @@ function Signup() {
 
     try {
       const payload = {
-        FullName: formData.FullName.trim(),
+        FullName: formData.fullName.trim(),
         email: formData.email.trim(),
         password: formData.password,
-        Location: formData.Location.trim(),
+        Location: formData.location.trim(),
         role
       };
 
@@ -67,14 +70,15 @@ function Signup() {
       
 
       setFormData({
-        FullName: "",
+        fullName: "",
         email: "",
         password: "",
-        Location: "",
+        location: "",
         role
       });
     } catch (error) {
-      console.log(error);
+      console.log("ERROR:", error.response?.data);
+      setMessage(error.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -109,7 +113,10 @@ function Signup() {
 
               {/* Role Selection */}
               <div className="flex flex-col sm:flex-row justify-center m-2 p-2 gap-2">
-                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2  hover:bg-blue-200 cursor-pointer transition duration-200">
+                <div
+                  className={`border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2
+                ${role === "farmer" ? "bg-green-800 text-white" : "bg-white"}`}
+                >
                   <div>
                     <i className="fa-solid fa-building-wheat"></i>
                     <button type="button" onClick={() => setRole("farmer")}>
@@ -118,7 +125,9 @@ function Signup() {
                   </div>
                 </div>
 
-                <div className="border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2 hover:bg-blue-200 cursor-pointer transition duration-200">
+                <div
+                  className={`border-2 border-black h-20 rounded-md flex flex-col justify-center text-center w-full sm:w-1/2  ${role === "buyer" ? "bg-green-800 text-white" : "bg-white"}`}
+                >
                   <div>
                     <i className="fa-solid fa-cart-shopping"></i>
                     <button type="button" onClick={() => setRole("buyer")}>
@@ -134,10 +143,10 @@ function Signup() {
                   <label>FullName</label>
                   <input
                     type="text"
-                    name="FullName"
-                    value={formData.FullName}
+                    name="fullName"
+                    value={formData.fullName}
                     onChange={handleChange}
-                    placeholder="Your full name"
+                    placeholder="Your Full Name"
                     required
                     className="border-2 border-black rounded-md h-10 px-2"
                   />
@@ -173,8 +182,8 @@ function Signup() {
                   <label>Enter your Location</label>
                   <input
                     type="text"
-                    name="Location"
-                    value={formData.Location}
+                    name="location"
+                    value={formData.location}
                     onChange={handleChange}
                     placeholder="City, State"
                     className="border-2 border-black rounded-md h-10 px-2"
@@ -192,6 +201,11 @@ function Signup() {
               </form>
             </div>
           </div>
+
+          {/* Message */}
+          {message && (
+            <p className="text-center text-red-500 mt-2">{message}</p>
+          )}
 
           {/* Login Link */}
           <p className="text-center m-2 p-4 text-gray-500 text-sm sm:text-base">

@@ -11,11 +11,16 @@ function Usernav() {
   const { t, i18n } = useTranslation();
   const isLoggedIn = !!localStorage.getItem("token");
   const [langOpen, setLangOpen] = useState(false);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("orders");
     navigate("/");
   };
+  const role = localStorage.getItem("role");
 
   return (
     <nav

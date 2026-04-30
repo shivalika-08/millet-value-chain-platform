@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "../CartContext";
 
-function ProductCard() {
-
+function ProductCard({ isUser }) {
+  const role = localStorage.getItem("role");
   const { addToCart } = useContext(CartContext);
-
 
   const navigate = useNavigate();
 
@@ -81,7 +80,13 @@ function ProductCard() {
           </button>
           <button
             className="px-3 border rounded-lg! text-sm hover:bg-yellow-500"
-            onClick={() => navigate("/Productdetails")}
+            onClick={() => {
+              if (role !== "buyer") {
+                alert("Please login as a user");
+                return;
+              }
+              navigate("/Productdetails");
+            }}
           >
             Details
           </button>

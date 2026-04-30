@@ -23,7 +23,7 @@ function Farmnav() {
         withCredentials:true,
       });
       dispatch(removeUser());
-      navigate("/Login")
+      navigate("/Login");
     }
     catch(err){
       console.error(err)
@@ -52,7 +52,11 @@ function Farmnav() {
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8">
           <li>
-            <Link to={"/Aboutus"} className="text-white font-bold">
+            <Link
+              to={"/Marketplace"}
+              className="text-white font-bold"
+              onClick={() => setActiveTab("marketplace")}
+            >
               {t("marketplace")}
             </Link>
           </li>
@@ -67,8 +71,11 @@ function Farmnav() {
             </Link>
           </li>
           <li>
-            <Link to={"/Login"}className="text-white font-bold"
-             onClick={handleLogout}>
+            <Link
+              to={"/Login"}
+              className="text-white font-bold"
+              onClick={handleLogout}
+            >
               {t("Logout")}
             </Link>
           </li>
@@ -114,7 +121,7 @@ function Farmnav() {
       {open && (
         <div className="md:hidden flex flex-col items-center gap-4 pb-4 bg-[rgba(0,60,0,0.9)]">
           <Link
-            to={"/Aboutus"}
+            to={"/Marketplace"}
             className="text-white font-bold"
             onClick={() => setOpen(false)}
           >
@@ -134,11 +141,7 @@ function Farmnav() {
           >
             {t("about")}
           </Link>
-          <Link
-            to="#"
-            className="text-white font-bold"
-            onClick={handleLogout}
-          >
+          <Link to="#" className="text-white font-bold" onClick={handleLogout}>
             {t("Logout")}
           </Link>
           <Link className="text-decoration-none">

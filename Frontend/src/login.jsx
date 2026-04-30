@@ -15,6 +15,7 @@ function Login() {
   });
 
   const [message, setMessage] = useState(null);
+  
 
   const handleChange = (e) => {
     setLogin({
@@ -34,25 +35,18 @@ function Login() {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
-      console.log(res.data);
+      console.log("LOGIN RESPONSE:", res.data);
 
-
+      // Only proceed if token exists
       if (res.data.token) {
-        // Store data
-        localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
 
-        // Redux store
-        dispatch(
-          addUser({
-            id: res.data.user.id,
-            FullName: res.data.user.FullName,
-            role: res.data.user.role,
-          })
-        );
+        // Correct dispatch
+        dispatch(addUser(res.data.user));
 
         // Success message
         setMessage({
@@ -60,14 +54,15 @@ function Login() {
           message: "Login successful! Redirecting...",
         });
 
-    
-        const role = res.data.user.role;
+        //  Safe role access
+        const role = res.data.user?.role;
+        localStorage.setItem("role", role);
+
         if (role === "farmer") {
           navigate("/Framhome");
         } else {
           navigate("/Userhome");
         }
-
       } else {
       
         setMessage({
@@ -77,11 +72,15 @@ function Login() {
       }
 
     } catch (error) {
+      console.log("LOGIN ERROR:", error.response?.data);
+
       setMessage({
         type: "danger",
         message: error.response?.data?.message || "Server error",
       });
     }
+
+    
   };
 
   return (
@@ -100,8 +99,6 @@ function Login() {
           <div className="flex justify-center m-2 p-2">
             <div className="border-2 border-black w-3/12 bg-olive-100 rounded-lg">
               <form onSubmit={handleSubmit}>
-                
-                {/* Email */}
                 <div className="flex flex-col m-2 p-2">
                   <label>Email Address</label>
                   <input
@@ -115,7 +112,6 @@ function Login() {
                   />
                 </div>
 
-                {/* Password */}
                 <div className="flex flex-col m-2 p-2">
                   <label>Password</label>
                   <input
@@ -129,7 +125,6 @@ function Login() {
                   />
                 </div>
 
-                {/* Button */}
                 <div className="flex justify-center m-2 p-2">
                   <button
                     type="submit"
@@ -142,7 +137,6 @@ function Login() {
             </div>
           </div>
 
-          {/* Message */}
           {message && (
             <p
               className={`text-center ${
