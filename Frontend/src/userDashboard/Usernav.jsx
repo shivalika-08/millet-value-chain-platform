@@ -20,7 +20,6 @@ function Usernav() {
     localStorage.removeItem("orders");
     navigate("/");
   };
-  const role = localStorage.getItem("role");
 
   return (
     <nav

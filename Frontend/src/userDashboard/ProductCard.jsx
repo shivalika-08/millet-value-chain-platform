@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "../CartContext";
 
-function ProductCard({ isUser }) {
+function ProductCard() {
   const role = localStorage.getItem("role");
   const { addToCart } = useContext(CartContext);
 
