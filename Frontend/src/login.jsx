@@ -40,21 +40,21 @@ function Login() {
 
       console.log("LOGIN RESPONSE:", res.data);
 
-      // Only proceed if token exists
+     
       if (res.data.token) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("token", res.data.token);
+        console.log(res.data.token);
 
-        // Correct dispatch
+
         dispatch(addUser(res.data.user));
 
-        // Success message
         setMessage({
           type: "success",
           message: "Login successful! Redirecting...",
         });
 
-        //  Safe role access
+   
         const role = res.data.user?.role;
         localStorage.setItem("role", role);
 
@@ -80,8 +80,7 @@ function Login() {
       });
     }
 
-    
-  };
+  }
 
   return (
     <>

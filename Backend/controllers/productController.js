@@ -1,3 +1,4 @@
+
 const Product = require("../models/Product");
 
 const addProduct = async (req, res) => {
@@ -15,7 +16,7 @@ const getProducts = async (req, res) => {
   try {
    
     const products = await Product.find({ userId: req.user.id });
-    console.log(products);
+    console.log("USER:", req.user);
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });

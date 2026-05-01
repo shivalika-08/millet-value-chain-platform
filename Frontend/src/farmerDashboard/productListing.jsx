@@ -9,25 +9,27 @@ function ProductListing() {
   const fetchProducts = async () => {
     try {
       const token = localStorage.getItem("token");
+      console.log("TOKEN:", token);
+  
+      if (!token) {
+        console.log("No token found");
+        return;
+      }
   
       const res = await axios.get(
         "http://localhost:5000/api/products",
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+         headers:{
+          Authorization:`Bearer ${token}`,
+         }
         }
       );
   
       setProducts(res.data);
     } catch (error) {
-      console.error(error);
+      console.error(error.response?.data || error.message);
     }
   };
-  
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <div className="mx-2 p-2 font-roboto font-semibold cursor-pointer">
