@@ -18,8 +18,8 @@ const verifytoken = (req, res, next) => {
     next();
   });
 };
-<<<<<<< HEAD
+
 module.exports = verifytoken;
-=======
+
 module.exports=verifytoken
->>>>>>> 8b9aabc31632c5d0d64ca4195a3929c44f326d52
+
