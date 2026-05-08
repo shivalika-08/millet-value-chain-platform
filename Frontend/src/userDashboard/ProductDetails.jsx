@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState} from "react";
+import { QRCodeSVG } from "qrcode.react";
+import { QrCode } from "lucide-react";
 
 import Usernav from "./Usernav";
 import Footer from "../footer";
@@ -11,6 +13,8 @@ import { CartContext } from "../CartContext";
 function ProductDetails() {
 
   const { addToCart } = useContext(CartContext);
+  const [showQR, setShowQR] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -28,6 +32,14 @@ function ProductDetails() {
   const totalPrice = pricePerUnit * quantity;
 
   const role = localStorage.getItem("role");
+  const qrData = `
+      Product: Product Name
+      Seller: Seller Name
+      Location: City, State
+      FSSAI: Certified
+      Price: ₹${totalPrice}
+      Quantity: ${quantity}
+`;
 
   if (role !== "buyer") {
     return <h1>Access Denied</h1>;
@@ -96,7 +108,7 @@ function ProductDetails() {
                   <i className="fa-solid fa-user"></i>Seller Name{" "}
                   <i className="fa-solid fa-location-dot"></i> City, State
                 </p>
-
+                        {/* Add to cart and quantity div */}
                 <div className="border-2 border-black w-full p-2 mt-3 bg-olive-100 rounded">
                   <div className="flex justify-between flex-wrap text-md text-bold font-roboto">
                     <p>Stock Avaliable</p>
@@ -153,10 +165,26 @@ function ProductDetails() {
                     </div>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
         </div>
+        {/* QR Traceability */}
+            <div className="rounded-lg border bg-card p-4 ">
+              <button onClick={() => setShowQR(!showQR)} className="flex items-center gap-2 text-sm font-semibold text-green-900 w-full ">
+                <QrCode className="h-5 w-5 text-green-900" />
+                {showQR ? "Hide" : "View"} QR Traceability
+              </button>
+              {showQR && (
+                <div className="mt-4 flex flex-col items-center gap-3 text-green-900">
+                  <QRCodeSVG value={qrData} size={180} level="H" />
+                  <p className="text-xs text-muted-foreground text-center max-w-xs">
+                    Scan to view farm-to-fork traceability details including farmer info, FSSAI certification, and origin.
+                  </p>
+                </div>
+              )}
+            </div>
       </div>
 
       <Footer />
